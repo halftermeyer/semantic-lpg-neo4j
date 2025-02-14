@@ -1,0 +1,442 @@
+{
+    "style": {
+      "font-family": "sans-serif",
+      "background-color": "#ffffff",
+      "background-image": "",
+      "background-size": "100%",
+      "node-color": "#ffffff",
+      "border-width": 4,
+      "border-color": "#000000",
+      "radius": 50,
+      "node-padding": 5,
+      "node-margin": 2,
+      "outside-position": "auto",
+      "node-icon-image": "",
+      "node-background-image": "",
+      "icon-position": "inside",
+      "icon-size": 64,
+      "caption-position": "inside",
+      "caption-max-width": 200,
+      "caption-color": "#000000",
+      "caption-font-size": 50,
+      "caption-font-weight": "normal",
+      "label-position": "inside",
+      "label-display": "pill",
+      "label-color": "#000000",
+      "label-background-color": "#ffffff",
+      "label-border-color": "#000000",
+      "label-border-width": 4,
+      "label-font-size": 40,
+      "label-padding": 5,
+      "label-margin": 4,
+      "directionality": "directed",
+      "detail-position": "inline",
+      "detail-orientation": "parallel",
+      "arrow-width": 5,
+      "arrow-color": "#000000",
+      "margin-start": 5,
+      "margin-end": 5,
+      "margin-peer": 20,
+      "attachment-start": "normal",
+      "attachment-end": "normal",
+      "relationship-icon-image": "",
+      "type-color": "#000000",
+      "type-background-color": "#ffffff",
+      "type-border-color": "#000000",
+      "type-border-width": 0,
+      "type-font-size": 16,
+      "type-padding": 5,
+      "property-position": "outside",
+      "property-alignment": "colon",
+      "property-color": "#000000",
+      "property-font-size": 16,
+      "property-font-weight": "normal"
+    },
+    "nodes": [
+      {
+        "id": "n0",
+        "position": {
+          "x": -964.2101746754313,
+          "y": -13.993853456641318
+        },
+        "caption": "",
+        "style": {
+          "node-color": "#fda1ff"
+        },
+        "labels": [
+          "Label"
+        ],
+        "properties": {
+          "name": "Actor"
+        }
+      },
+      {
+        "id": "n1",
+        "position": {
+          "x": -878.5858172673836,
+          "y": -427.5379926064951
+        },
+        "caption": "",
+        "labels": [
+          "Label"
+        ],
+        "properties": {
+          "name": "Person"
+        },
+        "style": {
+          "node-color": "#fda1ff"
+        }
+      },
+      {
+        "id": "n2",
+        "position": {
+          "x": -364.0267277807404,
+          "y": -699.3498790453928
+        },
+        "caption": "",
+        "style": {
+          "node-color": "#aea1ff"
+        },
+        "labels": [
+          "Relationship"
+        ],
+        "properties": {
+          "name": "ACTED_IN"
+        }
+      },
+      {
+        "id": "n3",
+        "position": {
+          "x": 66.78130962104268,
+          "y": -840.2551616399016
+        },
+        "caption": "",
+        "style": {
+          "node-color": "#fda1ff"
+        },
+        "labels": [
+          "Label"
+        ],
+        "properties": {
+          "name": "Movie"
+        }
+      },
+      {
+        "id": "n5",
+        "position": {
+          "x": -674.3925573072604,
+          "y": 207.3343760508917
+        },
+        "caption": "",
+        "labels": [
+          "MatchDefinedLabel",
+          "Label"
+        ],
+        "properties": {
+          "name": "_PersonActedInSome",
+          "pattern":" (p:Person) WHERE EXISTS {(p)-[:ACTED_IN]->()}",
+          "classElementVariable": "p"
+        },
+        "style": {
+          "node-color": "#fda1ff"
+        }
+      },
+      {
+        "id": "n6",
+        "position": {
+          "x": 12.78130962104268,
+          "y": -86.13067584430777
+        },
+        "caption": "",
+        "labels": [
+          "MatchDefinedRelationship",
+          "Relationship",
+          "Symmetric"
+        ],
+        "properties": {
+          "name": "_COACTOR",
+          "pattern":" (s:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(t:Person)",
+          "sourceElementVariable": "s",
+          "targetElementVariable": "t"
+        },
+        "style": {
+          "node-color": "#aea1ff"
+        }
+      },
+      {
+        "id": "n7",
+        "position": {
+          "x": -340.18272390852565,
+          "y": -152.782936313306
+        },
+        "caption": "",
+        "style": {
+          "node-color": "#aea1ff"
+        },
+        "labels": [
+          "Relationship",
+          "Symmetric"
+        ],
+        "properties": {
+          "name": "COACTOR"
+        }
+      },
+      {
+        "id": "n8",
+        "position": {
+          "x": -624.4187075786208,
+          "y": -65.24701269670172
+        },
+        "caption": "",
+        "labels": [
+          "Label"
+        ],
+        "properties": {
+          "name": "Director"
+        },
+        "style": {
+          "node-color": "#fda1ff"
+        }
+      },
+      {
+        "id": "n9",
+        "position": {
+          "x": -241.6010902104499,
+          "y": 113.08121681083131
+        },
+        "caption": "",
+        "labels": [
+          "MatchDefinedLabel",
+          "Label"
+        ],
+        "properties": {
+          "name": "_PersonDirectedSome",
+          "pattern":" (p:Person) WHERE EXISTS {(p)-[:DIRECTED]->()}",
+          "classElementVariable": "p"
+        },
+        "style": {
+          "node-color": "#fda1ff"
+        }
+      },
+      {
+        "id": "n10",
+        "position": {
+          "x": -120.57492869579619,
+          "y": -515.7446377601536
+        },
+        "caption": "",
+        "style": {
+          "node-color": "#aea1ff"
+        },
+        "labels": [
+          "Relationship"
+        ],
+        "properties": {
+          "name": "INVOLVED_IN"
+        }
+      },
+      {
+        "id": "n11",
+        "position": {
+          "x": 260.4940152675942,
+          "y": -294.54866083913555
+        },
+        "caption": "",
+        "labels": [
+          "MatchDefinedRelationship",
+          "Relationship",
+          "Symmetric"
+        ],
+        "properties": {
+          "name": "_COLLABORATOR",
+          "pattern":" (s:Person)-[:INVOLVED_IN]->()<-[:INVOLVED_IN]-(t:Person)",
+          "sourceElementVariable": "s",
+          "targetElementVariable": "t"
+        },
+        "style": {
+          "node-color": "#aea1ff"
+        }
+      },
+      {
+        "id": "n12",
+        "position": {
+          "x": -154.57809087754634,
+          "y": -321.54866083913555
+        },
+        "caption": "",
+        "labels": [
+          "Relationship",
+          "Symmetric"
+        ],
+        "properties": {
+          "name": "COLLABORATOR"
+        },
+        "style": {
+          "node-color": "#aea1ff"
+        }
+      },
+      {
+        "id": "n13",
+        "position": {
+          "x": -599.4044222324058,
+          "y": -840.2551616399016
+        },
+        "caption": "",
+        "labels": [
+          "Relationship"
+        ],
+        "properties": {
+          "name": "DIRECTED"
+        },
+        "style": {
+          "node-color": "#aea1ff"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "id": "n0",
+        "type": "SCO",
+        "style": {},
+        "properties": {},
+        "fromId": "n0",
+        "toId": "n1"
+      },
+      {
+        "id": "n2",
+        "type": "TO",
+        "style": {},
+        "properties": {},
+        "fromId": "n2",
+        "toId": "n3"
+      },
+      {
+        "id": "n3",
+        "type": "FROM",
+        "style": {},
+        "properties": {},
+        "fromId": "n2",
+        "toId": "n1"
+      },
+      {
+        "id": "n8",
+        "type": "EQUIVALENT",
+        "style": {},
+        "properties": {},
+        "fromId": "n0",
+        "toId": "n5"
+      },
+      {
+        "id": "n9",
+        "type": "TO",
+        "style": {},
+        "properties": {},
+        "fromId": "n7",
+        "toId": "n1"
+      },
+      {
+        "id": "n10",
+        "type": "FROM",
+        "style": {},
+        "properties": {},
+        "fromId": "n7",
+        "toId": "n1"
+      },
+      {
+        "id": "n11",
+        "type": "EQUIVALENT",
+        "style": {},
+        "properties": {},
+        "fromId": "n7",
+        "toId": "n6"
+      },
+      {
+        "id": "n12",
+        "fromId": "n8",
+        "toId": "n9",
+        "type": "EQUIVALENT",
+        "properties": {},
+        "style": {}
+      },
+      {
+        "id": "n13",
+        "type": "SCO",
+        "style": {},
+        "properties": {},
+        "fromId": "n8",
+        "toId": "n1"
+      },
+      {
+        "id": "n14",
+        "type": "IMPLIES",
+        "style": {},
+        "properties": {},
+        "fromId": "n2",
+        "toId": "n10"
+      },
+      {
+        "id": "n15",
+        "type": "TO",
+        "style": {},
+        "properties": {},
+        "fromId": "n10",
+        "toId": "n3"
+      },
+      {
+        "id": "n16",
+        "type": "FROM",
+        "style": {},
+        "properties": {},
+        "fromId": "n10",
+        "toId": "n1"
+      },
+      {
+        "id": "n17",
+        "fromId": "n12",
+        "toId": "n11",
+        "type": "EQUIVALENT",
+        "properties": {},
+        "style": {}
+      },
+      {
+        "id": "n18",
+        "type": "TO",
+        "style": {},
+        "properties": {},
+        "fromId": "n12",
+        "toId": "n1"
+      },
+      {
+        "id": "n19",
+        "type": "FROM",
+        "style": {},
+        "properties": {},
+        "fromId": "n12",
+        "toId": "n1"
+      },
+      {
+        "id": "n20",
+        "type": "FROM",
+        "style": {},
+        "properties": {},
+        "fromId": "n13",
+        "toId": "n1"
+      },
+      {
+        "id": "n21",
+        "type": "TO",
+        "style": {},
+        "properties": {},
+        "fromId": "n13",
+        "toId": "n3"
+      },
+      {
+        "id": "n22",
+        "type": "SCO",
+        "style": {},
+        "properties": {},
+        "fromId": "n7",
+        "toId": "n12"
+      }
+    ]
+  }
