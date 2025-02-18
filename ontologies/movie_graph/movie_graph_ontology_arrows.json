@@ -90,8 +90,8 @@
     {
       "id": "n2",
       "position": {
-        "x": 759.9573721819479,
-        "y": 165.904550637873
+        "x": 460.88263616630707,
+        "y": 148.03321112768617
       },
       "caption": "",
       "labels": [
@@ -107,8 +107,8 @@
     {
       "id": "n3",
       "position": {
-        "x": 884.6320837978849,
-        "y": -50.03838429992757
+        "x": 972.1858619165548,
+        "y": -147.1678438967436
       },
       "caption": "",
       "labels": [
@@ -129,7 +129,7 @@
       },
       "caption": "",
       "labels": [
-        "MatchDefinedLabel",
+        "PatternDefinedLabel",
         "Label"
       ],
       "properties": {
@@ -145,11 +145,11 @@
       "id": "n5",
       "position": {
         "x": 1051.991484296474,
-        "y": 804.1244857955938
+        "y": 876.7331610962534
       },
       "caption": "",
       "labels": [
-        "MatchDefinedRelationship",
+        "PatternDefinedRelationship",
         "Relationship",
         "Symmetric"
       ],
@@ -206,7 +206,7 @@
       },
       "caption": "",
       "labels": [
-        "MatchDefinedLabel",
+        "PatternDefinedLabel",
         "Label"
       ],
       "properties": {
@@ -243,7 +243,7 @@
       },
       "caption": "",
       "labels": [
-        "MatchDefinedRelationship",
+        "PatternDefinedRelationship",
         "Relationship",
         "Symmetric"
       ],
@@ -278,8 +278,8 @@
     {
       "id": "n12",
       "position": {
-        "x": 364.8176173681709,
-        "y": 26
+        "x": 414.7914670968105,
+        "y": -76.42791537673251
       },
       "caption": "",
       "labels": [
@@ -300,7 +300,7 @@
       },
       "caption": "",
       "labels": [
-        "MatchDefinedLabel",
+        "PatternDefinedLabel",
         "Label"
       ],
       "properties": {
@@ -319,18 +319,18 @@
         "y": 1343.112983850239
       },
       "caption": "",
-      "style": {
-        "node-color": "#a4dd00"
-      },
       "labels": [
         "Property",
-        "MatchDefinedNodeProperty"
+        "PatternDefinedNodeProperty"
       ],
       "properties": {
         "propertyOwnerVariable": "x",
-        "value": "MATCH SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH ca LIMIT 1 WITH size(ca) AS kbn",
+        "pattern": "SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH ca LIMIT 1 WITH size(ca) AS kbn",
         "name": "kb_number",
         "valueVariable": "kbn"
+      },
+      "style": {
+        "node-color": "#a4dd00"
       }
     }
   ],
@@ -481,19 +481,27 @@
     },
     {
       "id": "n18",
-      "type": "SCO",
-      "style": {},
-      "properties": {},
       "fromId": "n13",
-      "toId": "n0"
+      "toId": "n0",
+      "type": "SCO",
+      "properties": {},
+      "style": {}
     },
     {
       "id": "n20",
-      "type": "HAS_PROPERTY",
-      "style": {},
-      "properties": {},
       "fromId": "n0",
-      "toId": "n15"
+      "toId": "n15",
+      "type": "HAS_PROPERTY",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n21",
+      "fromId": "n12",
+      "toId": "n9",
+      "type": "IMPLIES",
+      "properties": {},
+      "style": {}
     }
   ]
 }
