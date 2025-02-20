@@ -47,7 +47,7 @@ RETURN p
 
 ## Details
 
-- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number`/// (see `ontologies/movie_graph/human_readable_movie_graph_ontology.cypher`).
+- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number`... (see `ontologies/movie_graph/human_readable_movie_graph_ontology.cypher`).
 - **Examples**: 8 Cypher queries in `docs/examples.txt`.
 - **Docs**: Full details in `docs/neoowl.txt`.
 
