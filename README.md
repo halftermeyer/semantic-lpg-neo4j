@@ -23,17 +23,27 @@ Overcomes RDF/OWL limits (inflexibility, expertise scarcity, slow iteration, tra
 ### Steps
 1. Clone: `git clone https://github.com/yourusername/neoowl.git`
 2. Configure: Copy `.env.example` to `.env`, set Neo4j credentials.
-3. Ingest: `python scripts/ingest_databases.py`
+3. Ingest movie graph data and ontology: `python scripts/ingest_databases.py`
+4. Run intference script until convergence: `python scripts/infer_to_convergence.py`
+5. Launch **Neoowl** inference server: `python scripts/neoowl_server.py`
 
 ## Usage
 
-- **Ontology**: See `ontologies/human_readable_movie_graph_ontology.cypher` for Movie Graph details.
-- **Reasoning**: Run `python notebooks/infer.ipynb` (full: `infer`, incremental: `infer_once`).
-- **Queries**: Explore inferred facts (e.g., `MATCH (a:Actor) RETURN a.kb_number`).
+1. Run query to create a new node:
+```cypher
+MATCH (m:Movie {title: "Top Gun"})
+CREATE (p:Person {name: "Jesus Barrasa"})
+MERGE (p)-[:ACTED_IN]->(m)
+```
+2. Inspect the new node:
+```cypher
+MATCH (p:Person {name: "Jesus Barrasa"})
+RETURN p
+```
 
 ## Details
 
-- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number` (see `docs/ontology.txt`).
+- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number` (see `ontologies/movie_graph/ontology.txt`).
 - **Examples**: 8 Cypher queries in `docs/examples.txt`.
 - **Docs**: Full details in `docs/neoowl.txt`.
 
