@@ -8,11 +8,25 @@
 
 Overcomes RDF/OWL limits (inflexibility, expertise scarcity, slow iteration, transactional gaps) with Neo4j’s flexibility, accessibility, and CDC integration.
 
-## Features
+## Ontology Meta-Model: Parallel with OWL
 
-- **Ontology**: Maps OWL constructs (e.g., `rdfs:subClassOf` -> `SCO`) to LPG.
-- **Reasoner**: Forward-chaining inference in Python, with full and CDC-driven modes.
-- **Real-Time**: Leverages AuraDB CDC.
+The meta-model encodes OWL-like semantics in LPG:
+- **Classes**: `Label` nodes (e.g., `Actor`), with `SCO` for `rdfs:subClassOf`.
+- **Dynamic Classes**: `PatternDefinedLabel` (e.g., `_PersonActedInSome`).
+- **Properties**: `Relationship` nodes (e.g., `ACTED_IN`), with `IMPLIES` for `rdfs:subPropertyOf`.
+- **Computed Values**: `PatternDefinedNodeProperty` (e.g., `kb_number`).
+
+## Comparing RDF/OWL to NeoOWL
+
+| RDF/OWL Construct                | NeoOWL Equivalent                       | Example Cypher                          |
+|----------------------------------|-----------------------------------------|-----------------------------------------|
+| `rdfs:subClassOf`                | `SCO` relationship                      | `CREATE (:Label {name: "Actor"})-[:SCO]->(:Label {name: "Person"})` |
+| `rdf:domain` / `rdf:range`       | `SOURCE` / `TARGET` relationships       | `CREATE (:Relationship {name: "ACTED_IN"})-[:SOURCE]->(:Label {name: "Person"})-[:TARGET]->(:Label {name: "Movie"})` |
+| `rdfs:subPropertyOf`             | `IMPLIES` relationship                  | `CREATE (:Relationship {name: "ACTED_IN"})-[:IMPLIES]->(:Relationship {name: "INVOLVED_IN"})` |
+| `owl:SymmetricProperty`          | `:Symmetric` label                      | `CREATE (:Relationship:Symmetric {name: "COACTOR"})` |
+| `owl:someValuesFrom`             | `PatternDefinedLabel`                   | `CREATE (:PatternDefinedLabel:Label {name: "_PersonActedInSome", pattern: "(p:Person) WHERE EXISTS {(p)-[:ACTED_IN]->()}"})` |
+| `owl:DatatypeProperty` (computed)| `PatternDefinedNodeProperty`            | `CREATE (:Label {name: "Actor"})-[:HAS_PROPERTY]->(:Property:PatternDefinedNodeProperty {name: "kb_number", pattern: "SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH size(ca) AS kbn"})` |
+
 
 ## Installation
 
