@@ -24,7 +24,7 @@ Overcomes RDF/OWL limits (inflexibility, expertise scarcity, slow iteration, tra
 1. Clone: `git clone https://github.com/yourusername/neoowl.git`
 2. Configure: Copy `.env.example` to `.env`, set Neo4j credentials.
 3. Ingest movie graph data and ontology: `python scripts/ingest_databases.py`
-4. Run intference script until convergence: `python scripts/infer_to_convergence.py`
+4. Run inference script until convergence: `python scripts/infer_to_convergence.py`
 5. Launch **Neoowl** inference server: `python scripts/neoowl_server.py`
 
 ## Usage
