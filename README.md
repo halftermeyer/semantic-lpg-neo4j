@@ -25,7 +25,7 @@ The meta-model encodes OWL-like semantics in LPG:
 | `rdfs:subPropertyOf`             | `IMPLIES` relationship                  | `CREATE (:Relationship {name: "ACTED_IN"})-[:IMPLIES]->(:Relationship {name: "INVOLVED_IN"})` |
 | `owl:SymmetricProperty`          | `:Symmetric` label                      | `CREATE (:Relationship:Symmetric {name: "COACTOR"})` |
 | `owl:someValuesFrom`             | `PatternDefinedLabel`                   | `CREATE (:PatternDefinedLabel:Label {name: "_PersonActedInSome", pattern: "(p:Person) WHERE EXISTS {(p)-[:ACTED_IN]->()}"})` |
-| `owl:DatatypeProperty` (computed)| `PatternDefinedNodeProperty`            | `CREATE (:Label {name: "Actor"})-[:HAS_PROPERTY]->(:Property:PatternDefinedNodeProperty {name: "kb_number", pattern: "SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH size(ca) AS kbn"})` |
+| `owl:DatatypeProperty` (computed)| `PatternDefinedNodeProperty`            | `CREATE (:Label {name: "Actor"})-[:HAS_PROPERTY]->(:Property:PatternDefinedNodeProperty {name: "kb_number", pattern: "SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH ca LIMIT 1 WITH size(ca) AS kbn"})` |
 
 
 ## Installation
