@@ -41,9 +41,13 @@ MATCH (p:Person {name: "Jesus Barrasa"})
 RETURN p
 ```
 
+### Demo (video)
+
+[![Ontology inference engine demo](https://img.youtube.com/vi/wnMCs-knI0Y/0.jpg)](https://www.youtube.com/watch?v=wnMCs-knI0Y)
+
 ## Details
 
-- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number` (see `ontologies/movie_graph/ontology.txt`).
+- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number`/// (see `ontologies/movie_graph/human_readable_movie_graph_ontology.cypher`).
 - **Examples**: 8 Cypher queries in `docs/examples.txt`.
 - **Docs**: Full details in `docs/neoowl.txt`.
 
