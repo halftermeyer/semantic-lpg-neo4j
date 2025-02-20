@@ -21,7 +21,7 @@ The meta-model encodes OWL-like semantics in LPG:
 | RDF/OWL Construct                | NeoOWL Equivalent                       | Example Cypher                          |
 |----------------------------------|-----------------------------------------|-----------------------------------------|
 | `rdfs:subClassOf`                | `SCO` relationship                      | `CREATE (:Label {name: "Actor"})-[:SCO]->(:Label {name: "Person"})` |
-| `rdf:domain` / `rdf:range`       | `SOURCE` / `TARGET` relationships       | `CREATE (:Relationship {name: "ACTED_IN"})-[:SOURCE]->(:Label {name: "Person"})-[:TARGET]->(:Label {name: "Movie"})` |
+| `rdf:domain` / `rdf:range`       | `SOURCE` / `TARGET` relationships       | `CREATE (:Label {name: "Person"})<-[:SOURCE]-(:Relationship {name: "ACTED_IN"})-[:TARGET]->(:Label {name: "Movie"})` |
 | `rdfs:subPropertyOf`             | `IMPLIES` relationship                  | `CREATE (:Relationship {name: "ACTED_IN"})-[:IMPLIES]->(:Relationship {name: "INVOLVED_IN"})` |
 | `owl:SymmetricProperty`          | `:Symmetric` label                      | `CREATE (:Relationship:Symmetric {name: "COACTOR"})` |
 | `owl:someValuesFrom`             | `PatternDefinedLabel`                   | `CREATE (:PatternDefinedLabel:Label {name: "_PersonActedInSome", pattern: "(p:Person) WHERE EXISTS {(p)-[:ACTED_IN]->()}"})` |
