@@ -4,6 +4,13 @@
 
 **NeoOWL** brings OWL-inspired semantics and reasoning to Neo4j’s LPG, extending some of Jesus Barrasa’s “Going Meta” ([work](https://github.com/jbarrasa/goingmeta/tree/main/session04)).
 
+## Disclaimer
+
+- This is a prototype
+- The code is untested and very far from production-grade
+- It's not supported by Neo4j
+- It's not supported by anyone
+
 ## Why NeoOWL?
 
 Overcomes RDF/OWL limits (inflexibility, expertise scarcity, slow iteration, transactional gaps) with Neo4j’s flexibility, accessibility, and CDC integration.
