@@ -2,7 +2,7 @@
 
 ![Movie Graph](media/arrows_app_movie_graph_ontology.png)
 
-**NeoOWL** brings OWL-inspired semantics and reasoning to Neo4j’s LPG, extending some of Jesus Barrasa’s “Going Meta” ([work](https://github.com/jbarrasa/goingmeta/tree/main/session04)).
+**NeoOWL** brings OWL-inspired semantics and reasoning to Neo4j’s LPG, extending some of Jesus Barrasa’s “Going Meta” [work](https://github.com/jbarrasa/goingmeta/tree/main/session04).
 
 ## Disclaimer
 
