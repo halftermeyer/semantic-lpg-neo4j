@@ -38,7 +38,7 @@ The meta-model encodes OWL-like semantics in LPG:
 ## Installation
 
 ### Prerequisites
-- Neo4j AuraDB (Business Critical+)
+- Neo4j AuraDB (Business Critical+ with CDC ON)
 - Python 3.8+ (`pip install neo4j`)
 
 ### Steps
