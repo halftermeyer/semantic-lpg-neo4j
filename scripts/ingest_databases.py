@@ -18,8 +18,8 @@ NEO4J_PASSWORD_ONTOLOGY = os.getenv("NEO4J_PASSWORD_ONTOLOGY", NEO4J_PASSWORD)
 NEO4J_ONTOLOGY_DB_NAME = os.getenv("NEO4J_ONTOLOGY_DB_NAME", "movie_ontology")
 
 # Cypher file paths
-DATA_CYPHER_FILE = "data/movie_graph.cypher"
-ONTOLOGY_CYPHER_FILE = "ontologies/movie_graph/human_readable_movie_graph_ontology.cypher"
+DATA_CYPHER_FILE = "../data/movie_graph.cypher"
+ONTOLOGY_CYPHER_FILE = "../ontologies/movie_graph/human_readable_movie_graph_ontology.cypher"
 
 def delete_all(driver, database):
     """Delete all nodes and relationships in the specified database."""
@@ -57,10 +57,10 @@ def main():
             NEO4J_URI,
             auth=(NEO4J_USERNAME, NEO4J_PASSWORD)
         )
-        driver_ontology = GraphDatabase.driver(
-            NEO4J_URI_ONTOLOGY,
-            auth=(NEO4J_USERNAME_ONTOLOGY, NEO4J_PASSWORD_ONTOLOGY)
-        )
+        #driver_ontology = GraphDatabase.driver(
+        #    NEO4J_URI_ONTOLOGY,
+        #    auth=(NEO4J_USERNAME_ONTOLOGY, NEO4J_PASSWORD_ONTOLOGY)
+        #)
     except Exception as e:
         print(f"Error connecting to Neo4j: {e}")
         return
@@ -68,23 +68,23 @@ def main():
     # Delete all data from both databases
     try:
         delete_all(driver_main, NEO4J_DB_NAME)
-        delete_all(driver_ontology, NEO4J_ONTOLOGY_DB_NAME)
+        #delete_all(driver_ontology, NEO4J_ONTOLOGY_DB_NAME)
     except Exception as e:
         print("Failed to clear databases. Exiting.")
         driver_main.close()
-        driver_ontology.close()
+        #driver_ontology.close()
         return
 
     # Ingest data into respective databases
     try:
         ingest_cypher_file(driver_main, NEO4J_DB_NAME, DATA_CYPHER_FILE)
-        ingest_cypher_file(driver_ontology, NEO4J_ONTOLOGY_DB_NAME, ONTOLOGY_CYPHER_FILE)
+        #ingest_cypher_file(driver_ontology, NEO4J_ONTOLOGY_DB_NAME, ONTOLOGY_CYPHER_FILE)
     except Exception as e:
         print("Failed to ingest data. Exiting.")
     finally:
         # Close connections
         driver_main.close()
-        driver_ontology.close()
+        #driver_ontology.close()
 
 if __name__ == "__main__":
     main()

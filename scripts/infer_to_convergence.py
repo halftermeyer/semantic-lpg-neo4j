@@ -159,6 +159,8 @@ class NeoOWLReasoner:
             for gen in rule_generators:
                 all_rules.extend(gen())
             logger.info(f"Generated {len(all_rules)} inference rules")
+            for i, rule in enumerate(all_rules):   
+                logger.info(f"Rule {i+1}:\n\n {rule} \n\n")
             return all_rules
         except Exception as e:
             logger.error(f"Failed to generate rules: {e}")

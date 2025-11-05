@@ -1,0 +1,71 @@
+@prefix lpg: <http://neo4j.com/lpg-ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# LPG Ontology Classes
+lpg:Label rdf:type owl:Class .  # Represents LPG node labels/classes
+lpg:Relationship rdf:type owl:Class .  # Represents LPG relationship types/properties
+lpg:Property rdf:type owl:Class .  # Represents node/relationship properties
+
+# LPG Ontology Classes for Dynamic Definitions
+lpg:PatternDefinedLabel rdf:type owl:Class ;
+    rdfs:subClassOf lpg:Label .  # Dynamic labels based on patterns
+lpg:PatternDefinedRelationship rdf:type owl:Class ;
+    rdfs:subClassOf lpg:Relationship .  # Dynamic relationships based on patterns
+lpg:PatternDefinedNodeProperty rdf:type owl:Class ;
+    rdfs:subClassOf lpg:Property .  # Dynamic computed properties
+
+# LPG Ontology Properties
+lpg:name rdf:type owl:DatatypeProperty ;
+    rdfs:domain [ owl:unionOf (lpg:Label lpg:Relationship lpg:Property) ] ;
+    rdfs:range xsd:string .
+lpg:pattern rdf:type owl:DatatypeProperty ;
+    rdfs:domain [ owl:unionOf (lpg:PatternDefinedLabel lpg:PatternDefinedRelationship lpg:PatternDefinedNodeProperty) ] ;
+    rdfs:range xsd:string .  # Cypher pattern for dynamic definitions
+lpg:classElementVariable rdf:type owl:DatatypeProperty ;
+    rdfs:domain lpg:PatternDefinedLabel ;
+    rdfs:range xsd:string .  # Variable in pattern for labels
+lpg:sourceElementVariable rdf:type owl:DatatypeProperty ;
+    rdfs:domain lpg:PatternDefinedRelationship ;
+    rdfs:range xsd:string .  # Variable for relationship source
+lpg:targetElementVariable rdf:type owl:DatatypeProperty ;
+    rdfs:domain lpg:PatternDefinedRelationship ;
+    rdfs:range xsd:string .  # Variable for relationship target
+lpg:propertyOwnerVariable rdf:type owl:DatatypeProperty ;
+    rdfs:domain lpg:PatternDefinedNodeProperty ;
+    rdfs:range xsd:string .  # Variable for property owner
+lpg:valueVariable rdf:type owl:DatatypeProperty ;
+    rdfs:domain lpg:PatternDefinedNodeProperty ;
+    rdfs:range xsd:string .  # Variable for computed value
+
+# LPG Ontology Relationships (mapped to OWL)
+lpg:SCO rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rdfs:subClassOf ;
+    rdfs:domain lpg:Label ;
+    rdfs:range lpg:Label .  # subClassOf
+lpg:SOURCE rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rdfs:domain ;
+    rdfs:domain lpg:Relationship ;
+    rdfs:range lpg:Label .  # Domain of relationship
+lpg:TARGET rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rdfs:range ;
+    rdfs:domain lpg:Relationship ;
+    rdfs:range lpg:Label .  # Range of relationship
+lpg:IMPLIES rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf rdfs:subPropertyOf ;
+    rdfs:domain lpg:Relationship ;
+    rdfs:range lpg:Relationship .  # subPropertyOf
+lpg:EQUIVALENT rdf:type owl:ObjectProperty ;
+    rdfs:subPropertyOf owl:equivalentClass ;  # Equivalent for labels/relationships
+    rdfs:domain [ owl:unionOf (lpg:Label lpg:Relationship) ] ;
+    rdfs:range [ owl:unionOf (lpg:PatternDefinedLabel lpg:PatternDefinedRelationship) ] .
+lpg:HAS_PROPERTY rdf:type owl:ObjectProperty ;
+    rdfs:domain lpg:Label ;
+    rdfs:range lpg:Property .  # Attach property to label
+
+# Symmetric Marker (as OWL class)
+lpg:Symmetric rdf:type owl:Class ;
+    rdfs:subClassOf lpg:Relationship ;
+    rdfs:subPropertyOf owl:SymmetricProperty .  # Symmetric relationships

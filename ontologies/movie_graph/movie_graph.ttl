@@ -1,0 +1,98 @@
+@prefix lpg: <http://neo4j.com/lpg-ontology#> .
+@prefix movie: <http://example.org/movie-graph#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+movie:Person rdf:type lpg:Label ;
+    lpg:name "Person" .
+
+movie:Movie rdf:type lpg:Label ;
+    lpg:name "Movie" .
+
+movie:Actor rdf:type lpg:Label ;
+    lpg:name "Actor" ;
+    lpg:SCO movie:Person .
+
+movie:Director rdf:type lpg:Label ;
+    lpg:name "Director" ;
+    lpg:SCO movie:Person .
+
+movie:Anomalous rdf:type lpg:Label ;
+    lpg:name "Anomalous" .
+
+movie:ACTED_IN rdf:type lpg:Relationship ;
+    lpg:name "ACTED_IN" ;
+    lpg:SOURCE movie:Person ;
+    lpg:TARGET movie:Movie .
+
+movie:DIRECTED rdf:type lpg:Relationship ;
+    lpg:name "DIRECTED" ;
+    lpg:SOURCE movie:Person ;
+    lpg:TARGET movie:Movie .
+
+movie:INVOLVED_IN rdf:type lpg:Relationship ;
+    lpg:name "INVOLVED_IN" ;
+    lpg:SOURCE movie:Person ;
+    lpg:TARGET movie:Movie .
+
+movie:COACTOR rdf:type lpg:Symmetric ;
+    lpg:name "COACTOR" ;
+    lpg:SOURCE movie:Person ;
+    lpg:TARGET movie:Person .
+
+movie:COLLABORATOR rdf:type lpg:Symmetric ;
+    lpg:name "COLLABORATOR" ;
+    lpg:SOURCE movie:Person ;
+    lpg:TARGET movie:Person .
+
+movie:ACTED_IN lpg:IMPLIES movie:INVOLVED_IN .
+movie:DIRECTED lpg:IMPLIES movie:INVOLVED_IN .
+movie:COACTOR lpg:IMPLIES movie:COLLABORATOR .
+
+movie:_PersonActedInSome rdf:type lpg:PatternDefinedLabel ;
+    lpg:name "_PersonActedInSome" ;
+    lpg:pattern "(p:Person) WHERE EXISTS {(p)-[:ACTED_IN]->()}" ;
+    lpg:classElementVariable "p" ;
+    lpg:EQUIVALENT movie:Actor .
+
+movie:_PersonDirectedSome rdf:type lpg:PatternDefinedLabel ;
+    lpg:name "_PersonDirectedSome" ;
+    lpg:pattern "(p:Person) WHERE EXISTS {(p)-[:DIRECTED]->()}" ;
+    lpg:classElementVariable "p" ;
+    lpg:EQUIVALENT movie:Director .
+
+movie:_KevinBacon rdf:type lpg:PatternDefinedLabel ;
+    lpg:name "_KevinBacon" ;
+    lpg:pattern "(p:Person {name: 'Kevin Bacon'})" ;
+    lpg:classElementVariable "p" ;
+    lpg:SCO movie:Actor .
+
+movie:_EasterEggActor rdf:type lpg:PatternDefinedLabel ;
+    lpg:name "_EasterEggActor" ;
+    lpg:pattern "(p:Person {name: 'Emil Eifrem'})" ;
+    lpg:classElementVariable "p" ;
+    lpg:SCO movie:Actor , movie:Anomalous .
+
+movie:_COACTOR rdf:type lpg:PatternDefinedRelationship ;
+    lpg:name "_COACTOR" ;
+    lpg:pattern "(s:Person)-[:ACTED_IN]->()<-[:ACTED_IN]-(t:Person)" ;
+    lpg:sourceElementVariable "s" ;
+    lpg:targetElementVariable "t" ;
+    lpg:EQUIVALENT movie:COACTOR .
+
+movie:_COLLABORATOR rdf:type lpg:PatternDefinedRelationship ;
+    lpg:name "_COLLABORATOR" ;
+    lpg:pattern "(s:Person)-[:INVOLVED_IN]->()<-[:INVOLVED_IN]-(t:Person)" ;
+    lpg:sourceElementVariable "s" ;
+    lpg:targetElementVariable "t" ;
+    lpg:EQUIVALENT movie:COLLABORATOR .
+
+movie:kb_number rdf:type lpg:PatternDefinedNodeProperty ;
+    lpg:name "kb_number" ;
+    lpg:pattern "SHORTEST 1 (x)-[ca:COACTOR]-*(y:_KevinBacon) WITH ca LIMIT 1 WITH size(ca) AS kbn";
+    lpg:propertyOwnerVariable "x" ;
+    lpg:valueVariable "kbn" .
+
+movie:Actor lpg:HAS_PROPERTY movie:kb_number .
