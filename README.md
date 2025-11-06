@@ -1,4 +1,4 @@
-# NeoOWL
+# Semantic LPG Reasoning
 
 ![Movie Graph](media/arrows_app_movie_graph_ontology.png)
 
@@ -23,9 +23,9 @@ The meta-model encodes OWL-like semantics in LPG:
 - **Properties**: `Relationship` nodes (e.g., `ACTED_IN`), with `IMPLIES` for `rdfs:subPropertyOf`.
 - **Computed Values**: `PatternDefinedNodeProperty` (e.g., `kb_number`).
 
-## Comparing RDF/OWL to NeoOWL
+## Comparing RDF/OWL to LPG approach
 
-| RDF/OWL Construct                | NeoOWL Equivalent                       | Example Cypher                          |
+| RDF/OWL Construct                | LPG Equivalent                       | Example Cypher                          |
 |----------------------------------|-----------------------------------------|-----------------------------------------|
 | `rdfs:subClassOf`                | `SCO` relationship                      | `CREATE (:Label {name: "Actor"})-[:SCO]->(:Label {name: "Person"})` |
 | `rdf:domain` / `rdf:range`       | `SOURCE` / `TARGET` relationships       | `CREATE (person)<-[:SOURCE]-(:Relationship {name: "ACTED_IN"})-[:TARGET]->(movie)` |
