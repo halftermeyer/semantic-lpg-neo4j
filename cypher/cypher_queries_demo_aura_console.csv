@@ -1,0 +1,53 @@
+name,description,query,id,parentId,isFolder
+movie_semantics,,,0,,true
+build LPG ontology from RDF,,,1,0,true
+show everything,,"// show everything
+MATCH rel=()-->()
+RETURN rel",2,1,false
+build LPG onto from RDF onto,,"//set RDF ressource types AS LPG labels/types
+MATCH (s)<-[:SUBJECT]-(t)-[:OBJECT]->(o),
+(t)-[:PREDICATE]->(p WHERE p.uri = ""http://www.w3.org/1999/02/22-rdf-syntax-ns#type"")
+SET s:$(split(o.uri,""#"")[1]);
+
+// PatternDefinedLabels are Label
+MATCH (l:PatternDefinedLabel) SET l:Label;
+
+// PatternDefinedRelationships are Relationships
+MATCH (r:PatternDefinedRelationship) SET r:Relationship;
+
+// Symmetric are Relationships
+MATCH (r:Symmetric) SET r:Relationship;
+
+// set name, pattern, classElementVariable, propertyOwnerVariable, valueVariable, sourceElementVariable, targetElementVariable
+UNWIND [""name"", ""pattern"", ""classElementVariable"", ""propertyOwnerVariable"", ""valueVariable"", ""sourceElementVariable"", ""targetElementVariable""] AS prop_name
+CALL (prop_name) {
+  MATCH (s)<-[:SUBJECT]-(t)-[:OBJECT]->(o),
+  (t)-[:PREDICATE]->(p WHERE p.uri = ""http://neo4j.com/lpg-ontology#""+prop_name)
+  SET s[prop_name] = o.uri
+};
+
+// Merge HAS_PROPERTY, SCO, SOURCE, TARGET, IMPLIES, EQUIVALENT relationships
+UNWIND [""HAS_PROPERTY"", ""SCO"", ""SOURCE"", ""TARGET"", ""IMPLIES"", ""EQUIVALENT""] AS rel_type
+CALL (rel_type) {
+  MATCH (s)<-[:SUBJECT]-(t)-[:OBJECT]->(o),
+  (t)-[:PREDICATE]->(p WHERE p.uri = ""http://neo4j.com/lpg-ontology#""+rel_type)
+  MERGE (s)-[r:$(rel_type)]->(o)
+};",3,1,false
+show LPG ontology,,"// show LPG ontology
+MATCH rel=(:!Triple)-->(:!Triple)
+RETURN rel",4,1,false
+movie graph,,"MATCH p=(n)-[r WHERE NOT type(r) STARTS WITH ""_""]->(m) RETURN p",5,0,false
+Tom Cruise,,"MATCH p=(:Person {name: ""Tom Cruise""})--() RETURN p",6,0,false
+Tom Cruise coactors,,"MATCH p=(t:Person {name: ""Tom Cruise""})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(ca)
+RETURN p",7,0,false
+Clint to Kevin,,"MATCH p = SHORTEST 3 (t:Person {name:""Clint Eastwood""})(()-[:ACTED_IN]->(m)<-[:ACTED_IN]-())*(k:Person {name:""Kevin Bacon""})
+RETURN p",8,0,false
+Tom Cruise COACTOR,,"MATCH p=(t:Person {name: ""Tom Cruise""})-[:COACTOR]->(c)
+RETURN p",9,0,false
+kb_number property,,"MATCH (a:Actor)
+RETURN a.name AS actor, a.kb_number AS kb_number
+ORDER BY kb_number ASC",10,0,false
+Insert Jesus,,"MATCH (m1:Movie {title:""A Few Good Men""}), (m2:Movie {title:""Unforgiven""})
+MERGE (j:Person {name: ""Jesus Barrasa""})
+MERGE (j)-[:ACTED_IN]->(m1)
+MERGE (j)-[:ACTED_IN]->(m2)",11,0,false
