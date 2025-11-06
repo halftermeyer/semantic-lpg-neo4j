@@ -1,8 +1,8 @@
-# NeoOWL
+# Semantic LPG Reasoning
 
 ![Movie Graph](media/arrows_app_movie_graph_ontology.png)
 
-**NeoOWL** brings OWL-inspired semantics and reasoning to Neo4j’s LPG, extending some of Jesus Barrasa’s “Going Meta” ([work](https://github.com/jbarrasa/goingmeta/tree/main/session04)).
+**NeoOWL** brings OWL-inspired semantics and reasoning to Neo4j’s LPG, extending some of Jesus Barrasa’s “Going Meta” [work](https://github.com/jbarrasa/goingmeta/tree/main/session04).
 
 ## Disclaimer
 
@@ -23,9 +23,9 @@ The meta-model encodes OWL-like semantics in LPG:
 - **Properties**: `Relationship` nodes (e.g., `ACTED_IN`), with `IMPLIES` for `rdfs:subPropertyOf`.
 - **Computed Values**: `PatternDefinedNodeProperty` (e.g., `kb_number`).
 
-## Comparing RDF/OWL to NeoOWL
+## Comparing RDF/OWL to LPG approach
 
-| RDF/OWL Construct                | NeoOWL Equivalent                       | Example Cypher                          |
+| RDF/OWL Construct                | LPG Equivalent                       | Example Cypher                          |
 |----------------------------------|-----------------------------------------|-----------------------------------------|
 | `rdfs:subClassOf`                | `SCO` relationship                      | `CREATE (:Label {name: "Actor"})-[:SCO]->(:Label {name: "Person"})` |
 | `rdf:domain` / `rdf:range`       | `SOURCE` / `TARGET` relationships       | `CREATE (person)<-[:SOURCE]-(:Relationship {name: "ACTED_IN"})-[:TARGET]->(movie)` |
@@ -38,7 +38,7 @@ The meta-model encodes OWL-like semantics in LPG:
 ## Installation
 
 ### Prerequisites
-- Neo4j AuraDB (Business Critical+)
+- Neo4j AuraDB (Business Critical+ with CDC ON)
 - Python 3.8+ (`pip install neo4j`)
 
 ### Steps
@@ -65,12 +65,6 @@ RETURN p
 ### Demo (video)
 
 [![Ontology inference engine demo](https://img.youtube.com/vi/wnMCs-knI0Y/0.jpg)](https://www.youtube.com/watch?v=wnMCs-knI0Y)
-
-## Details
-
-- **Ontology**: Defines `Actor`, `COACTOR`, `kb_number`... (see `ontologies/movie_graph/human_readable_movie_graph_ontology.cypher`).
-- **Examples**: 8 Cypher queries in `docs/examples.txt`.
-- **Docs**: Full details in `docs/neoowl.txt`.
 
 ## Acknowledgments
 
